@@ -1,0 +1,26 @@
+.app-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.control__list {
+    display: flex;
+}
+
+.control__item {
+    list-style-type: none;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    cursor: pointer;
+    transition: all .1s linear;
+}
+
+.control__item--is-active {
+    background-color: #61dafb;
+    color: white;
+    border-color: #61dafb;
+}
