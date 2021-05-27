@@ -9,10 +9,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: [
-        { id: 1, name: 'Nguyen', status: false },
-        { id: 2, name: 'Minh', status: false }
-      ]
+      tasks: []
     }
   }
 
@@ -34,6 +31,12 @@ class App extends Component {
     return this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4();
   }
 
+  /** Set locostogare */
+  setLocal(tasks) {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
+
+  /**Add task */
   onSubmit = (task) => {
     let { tasks } = this.state;
     task.id = this.generateID();
@@ -41,7 +44,36 @@ class App extends Component {
     this.setState({
       tasks: tasks
     });
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    this.setLocal(tasks)
+    // localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
+
+  /**Delete task */
+  onDeleteTask = (id) => {
+    let { tasks } = this.state;
+    const index = this.findID(id);
+    tasks.splice(index, 1);
+    this.setState({
+      tasks: tasks
+    });
+    this.setLocal(tasks);
+  }
+
+  /** Tìm index theo ID */
+  findID(id) {
+    let { tasks } = this.state;
+    return tasks.findIndex(task => task.id === id);
+  }
+
+  /** Check completed */
+  onChecked = (id) => {
+    let { tasks } = this.state;
+    const index = this.findID(id);
+    tasks[index].status = !tasks[index].status;
+    this.setState({
+      tasks: tasks
+    });
+    this.setLocal(tasks);
   }
 
   render() {
@@ -51,14 +83,19 @@ class App extends Component {
     return (
       <div className="app-container">
         <Header />
+
         <div className="app__content">
           <TaskForm
-            onSubmit={ this.onSubmit } 
-          
+            onSubmit={ this.onSubmit }
           />
-          <TaskList tasks={ tasks } />
+          <TaskList
+            tasks={ tasks } 
+            onDeleteTask={ this.onDeleteTask }
+            onChecked={ this.onChecked }
+          />
           <TaskControl />
         </div>
+
         <Footer />
       </div>
     );

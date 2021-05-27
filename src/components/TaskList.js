@@ -12,6 +12,8 @@ class TaskList extends Component {
                 task={task} 
                 key={task.id} 
                 index={index} 
+                onDeleteTask={ this.props.onDeleteTask }
+                onChecked={ this.props.onChecked }
               />;
     });
     
