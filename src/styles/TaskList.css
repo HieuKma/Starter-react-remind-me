@@ -1,3 +1,19 @@
 .tasks__list {
     padding: 0;
+    height: calc(100vh - 370px);
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+@media only screen and (min-width: 768px) {
+    .tasks__list {
+        height: calc(100vh - 470px);
+    }
+}
+
+@media only screen and (min-width: 993px) {
+    .tasks__list {
+        height: 100%;
+        overflow: unset;
+    }
 }

@@ -14,6 +14,7 @@ class TaskList extends Component {
                 index={index} 
                 onDeleteTask={ this.props.onDeleteTask }
                 onChecked={ this.props.onChecked }
+                onUpdate={ this.props.onUpdate }
               />;
     });
     

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import '../styles/TaskItem.css';
 class TaskItem extends Component {
+
   onClick = () => {
     const id = this.props.task.id;
     this.props.onDeleteTask(id);
@@ -9,6 +10,11 @@ class TaskItem extends Component {
   onChecked = () => {
     const id = this.props.task.id;
     this.props.onChecked(id);
+  }
+
+  onEdit = () => {
+    const id = this.props.task.id;
+    this.props.onUpdate(id);
   }
 
   render() {
@@ -21,9 +27,13 @@ class TaskItem extends Component {
           </div>
           <p className={ task.status ? 'task__name task--is-completed' : 'task__name'}>{ task.name }</p>
           <div className="task__icon">
-            <i className="fas fa-edit"></i>
-            <i className="far fa-trash-alt"
-               onClick={ this.onClick }
+            <i
+              className="fas fa-edit"
+              onClick={ this.onEdit }
+            ></i>
+            <i
+              className="far fa-trash-alt"
+              onClick={ this.onClick }
             ></i>
           </div>
         </li>

@@ -4,8 +4,13 @@
   box-sizing: border-box;
 }
 
+:root {
+  --primary: #0079bf;
+}
+
 .app-container {
   font-family: 'Dancing Script', cursive;
   padding: 20px 15px;
   margin: 0 auto;
+  max-width: 500px;
 }

@@ -21,7 +21,13 @@
 }
 
 .control__item--is-active {
-    background-color: #61dafb;
+    background-color: var(--primary);
     color: white;
-    border-color: #61dafb;
+    border-color: var(--primary);
+}
+
+@media only screen and (min-width: 768px) {
+    .app-control {
+        padding: 40px 0;
+    }
 }

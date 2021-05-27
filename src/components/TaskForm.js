@@ -13,6 +13,32 @@ class TaskForm extends Component {
     }
   }
 
+  componentWillMount() {
+    if (this.props.task) {
+      this.setState({
+        id: this.props.task.id,
+        name: this.props.task.name,
+        status: this.props.task.id,
+      });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps && nextProps.task) {
+      this.setState({
+        id: nextProps.task.id,
+        name: nextProps.task.name,
+        status: nextProps.task.status,
+      });
+    } else if (!nextProps.task) {
+      this.setState({
+        id: "",
+        name: "",
+        status: false,
+      });
+    }
+  }
+
   onChange = (e) => {
     let target = e.target;
     let name = target.name;
@@ -37,6 +63,10 @@ class TaskForm extends Component {
   }
 
   render() {
+    let { id } = this.state;
+    let btn = id === '' 
+              ? <input type="submit" value="Add" /> 
+              : <input type="submit" value="Edit" />
     return (
       <form className="app-form" onSubmit={ this.onSubmit }>
         <input
@@ -46,7 +76,7 @@ class TaskForm extends Component {
           value={ this.state.name }
           onChange={ this.onChange }
         />
-        <input type="submit" value="Add" />
+        {btn}
       </form>
     );
   }
