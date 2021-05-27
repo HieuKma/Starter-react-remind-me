@@ -17,6 +17,7 @@
     border: 1px solid #333;
     cursor: pointer;
     transition: all .1s linear;
+    overflow: hidden;
 }
 
 .control__item--is-active {

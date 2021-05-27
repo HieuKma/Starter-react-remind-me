@@ -9,7 +9,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: []
+      tasks: [],
+      filterStatus: -1
     }
   }
 
@@ -76,9 +77,20 @@ class App extends Component {
     this.setLocal(tasks);
   }
 
+  /** Filter */
+  onFilter = (value) => {
+    this.setState({
+      filterStatus: value
+    });
+  }
+
   render() {
 
-    let { tasks } = this.state;
+    let { tasks, filterStatus } = this.state;
+
+    if(filterStatus === 0) {
+      tasks = tasks.filter(task => task.status === false);
+    } else if(filterStatus === 1) tasks = tasks.filter(task => task.status !== false);
 
     return (
       <div className="app-container">
@@ -93,7 +105,11 @@ class App extends Component {
             onDeleteTask={ this.onDeleteTask }
             onChecked={ this.onChecked }
           />
-          <TaskControl />
+          <TaskControl
+            tasks={ tasks } 
+            onFilter= { this.onFilter }
+            filterStatus={ filterStatus }
+          />
         </div>
 
         <Footer />
