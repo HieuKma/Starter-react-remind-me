@@ -43,8 +43,12 @@ class App extends Component {
     let { tasks } = this.state;
     const index = this.findID(task.id);
     if(task.id === '') {
-      task.id = this.generateID();
-      tasks.push(task);
+      if(task.name === '') {
+        alert('You have not entered a to-do')
+      } else {
+        task.id = this.generateID();
+        tasks.push(task);
+      }
     } else {
       tasks.splice(index, 1, task);
     }
@@ -86,6 +90,14 @@ class App extends Component {
 
   /** Filter */
   onFilter = (value) => {
+    let tasks = this.state.tasks;
+    if (value === 2) {
+      tasks = tasks.filter(task => task.status === false);
+      this.setState({
+        tasks: tasks
+      });
+      this.setLocal(tasks);
+    }
     this.setState({
       filterStatus: value
     });
@@ -100,6 +112,12 @@ class App extends Component {
     })
   }
 
+  onReset = () => {
+    this.setState({
+      taskEditting: null
+    });
+  }
+
   render() {
 
     let { tasks, filterStatus, taskEditting } = this.state;
@@ -110,7 +128,9 @@ class App extends Component {
 
     return (
       <div className="app-container">
-        <Header />
+        <Header
+          onReset={ this.onReset }
+        />
 
         <div className="app__content">
           <TaskForm

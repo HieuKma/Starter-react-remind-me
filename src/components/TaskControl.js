@@ -38,6 +38,11 @@ class TaskControl extends Component {
                 onClick={ this.onClick }
                 className= { filterStatus === 1 ? 'control__item control__item--is-active' : 'control__item'}
               >Done</li>
+              <li
+                value={2}
+                onClick={ this.onClick }
+                className= { filterStatus === 2 ? 'control__item control__item--is-active' : 'control__item'}
+              >Clear Completed</li>
             </ul>
         </div>
     );
